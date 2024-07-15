@@ -1,0 +1,102 @@
+<!-- dashboard.component.html -->
+<div class="dashboard rounded-5 container py-5">
+  <div
+    class="d-flex justify-content-center align-items-center rounded-top-5 mb-4"
+  >
+    <h1 class="text-center text-white mt-3">Dashboard</h1>
+  </div>
+
+  <div class="container">
+    <div class="row mt-4">
+      <div class="col-md-6 mb-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <div class="chart-container" style="position: relative">
+              <ag-charts
+                [options]="salesChartOptions"
+                style="position: absolute; width: 100%"
+              ></ag-charts>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 mb-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <div class="chart-container" style="position: relative">
+              <ag-charts
+                [options]="userGrowthOptions"
+                style="position: absolute; width: 100%"
+              ></ag-charts>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title mb-5 text-center">Products</h5>
+            <p class="text-center">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              Laboriosam dicta debitis obcaecati. Velit aliquid saepe explicabo.
+              Saepe adipisci, officiis quidem exercitationem accusamus
+              architecto voluptatem amet. Doloremque magni error nam voluptatum.
+            </p>
+          </div>
+          <div class="card-footer d-flex justify-content-center">
+            <div class="mt-3">
+              <a
+                class="btn btn-primary"
+                [routerLink]="['/pages/product/productTable']"
+                >View All Products</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title mb-5 text-center">Categories</h5>
+            <p class="text-center">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              Laboriosam dicta debitis obcaecati. Velit aliquid saepe explicabo.
+              Saepe adipisci, officiis quidem exercitationem accusamus
+              architecto voluptatem amet. Doloremque magni error nam voluptatum.
+            </p>
+          </div>
+          <div class="card-footer d-flex justify-content-center">
+            <div class="mt-3">
+              <a class="btn btn-primary" [routerLink]="['../categoryTable']"
+                >View All Categories</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title mb-5 text-center">Users</h5>
+            <p class="text-center">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              Laboriosam dicta debitis obcaecati. Velit aliquid saepe explicabo.
+              Saepe adipisci, officiis quidem exercitationem accusamus
+              architecto voluptatem amet. Doloremque magni error nam voluptatum.
+            </p>
+          </div>
+          <div class="card-footer d-flex justify-content-center">
+            <div class="mt-3">
+              <a class="btn btn-primary" [routerLink]="['../usersTable']"
+                >View All Users</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

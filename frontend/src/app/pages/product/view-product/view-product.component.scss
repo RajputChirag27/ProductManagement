@@ -1,0 +1,15 @@
+.card {
+  background: linear-gradient(90deg, #8875f3, #6f57faa4, #684efaa8) !important;
+  .product-image {
+    max-width: 500px; // Control the size of the image within the card
+    margin: 0 auto; // Center the image horizontally
+    display: block;
+  }
+}
+
+.modal-body {
+  .modal-image {
+    max-width: 100%; // Ensure the image takes up the modal width but not larger
+    height: auto; // Maintain aspect ratio
+  }
+}

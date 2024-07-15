@@ -1,0 +1,95 @@
+/* Container for the entire dashboard */
+.dashboard {
+  background: #000 !important;
+  color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  overflow-x: hidden; /* Corrected property value */
+}
+
+/* Styling for the main heading */
+.dashboard h1 {
+  color: #ffffff;
+  margin-top: 1rem;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Styling for the card components */
+.card {
+  border-radius: 1rem;
+  background: linear-gradient(90deg, #8875f3, #6f57faa4, #684efaa8) !important;
+  color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem;
+}
+
+/* Styling for the card body */
+.card-body {
+  padding: 1.5rem;
+}
+
+/* Styling for the card titles */
+.card-title {
+  margin-bottom: 1rem;
+  font-weight: bold;
+  font-size: 1.25rem;
+}
+
+/* Styling for the list items within the cards */
+.list-group-item {
+  background-color: #495057;
+  border: none;
+  color: #fff;
+  padding: 0.75rem 1rem;
+  border-radius: 5px;
+  margin-bottom: 0.5rem;
+}
+
+/* Styling for alternating list items */
+.list-group-item:nth-child(odd) {
+  background-color: #6c757d;
+}
+
+/* Container for the charts */
+.chart-container {
+  height: 300px;
+}
+
+/* Generic heading styling */
+h5 {
+  margin-bottom: 1rem;
+  font-weight: bold;
+  font-size: 1.25rem;
+}
+
+/* Styling for primary buttons */
+.btn-primary {
+  background-color: #a167ffd3 !important;
+  color: #fff !important;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #8c58e8d3 !important;
+}
+
+@media (max-width: 768px) {
+  /* Adjustments for smaller screens */
+  .dashboard {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .card-title {
+    font-size: 1rem;
+  }
+
+  .btn-primary {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+  }
+}

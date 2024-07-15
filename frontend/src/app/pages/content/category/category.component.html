@@ -1,0 +1,23 @@
+<!-- components/event-editor/event-editor.component.html -->
+
+<div class="event-editor my-5">
+  <div class="row">
+    <div class="col-lg-4">
+      <button (click)="back()" class="btn btn-primary mb-5 px-4 py-2 fs-4">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i> Category
+      </button>
+    </div>
+  </div>
+  <h2 class="text-white">
+    {{ eventId ? 'Edit Category' : 'Create Category' }}
+  </h2>
+  <form [formGroup]="eventForm" (ngSubmit)="onSubmit()">
+    <div class="form-group mt-5 mb-3">
+      <label for="name" class="text-white">Name</label>
+      <input id="name" formControlName="name" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">
+      {{ eventId ? 'Update' : 'Save' }}
+    </button>
+  </form>
+</div>
