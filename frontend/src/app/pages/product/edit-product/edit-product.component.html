@@ -1,8 +1,8 @@
-<div class="container mt-5">
+<div class="container">
   <div class="row">
     <div class="col-lg-4">
       <button (click)="back()" class="btn btn-primary mb-5 px-4 py-2 fs-4">
-        <i class="fa fa-arrow-left" aria-hidden="true"></i> Products
+        <i class="fa fa-arrow-left" aria-hidden="true"></i> Back
       </button>
     </div>
   </div>
@@ -112,14 +112,14 @@
   </form>
 </div>
 
-<div *ngIf="imagePreview" class="mt-3 mb-3">
+<!-- <div *ngIf="imagePreview" class="mt-3 mb-3">
   <img
     [src]="imagePreview"
     alt="Image preview"
     style="max-width: 200px"
     (click)="openImageModal()"
   />
-</div>
+</div> -->
 
 <!-- Bootstrap Modal -->
 <div

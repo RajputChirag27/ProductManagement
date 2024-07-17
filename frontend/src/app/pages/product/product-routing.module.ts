@@ -10,10 +10,10 @@ const routes: Routes = [
     path: '',
     component: ProductComponent,
     children: [
-      { path: '', component: EditProductComponent },
-      { path: 'productTable', component: ProductTableComponent },
-      { path: 'viewProducts/:id', component: ViewProductComponent },
-      { path: ':id', component: EditProductComponent }
+      { path: '', component: EditProductComponent, data :{ animation: 'EditProduct' } },
+      { path: 'productTable', component: ProductTableComponent, data :{ animation: 'ProductTable' } },
+      { path: 'viewProducts/:id', component: ViewProductComponent, data :{ animation: 'ViewProduct' } },
+      { path: ':id', component: EditProductComponent, data :{ animation: 'EditProduct' } }
     ]
   }
 ]

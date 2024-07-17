@@ -33,48 +33,59 @@ export class TokenInterceptor implements HttpInterceptor {
 
     return next.handle(clonedRequest).pipe(
       retry(1),
-      catchError((returnedError: HttpErrorResponse) => {
-        let errorMessage: string | null = null
-        let handled = false
-
-        if (returnedError.error instanceof ErrorEvent) {
-          errorMessage = `Error: ${returnedError.error.message}`
-        } else if (returnedError instanceof HttpErrorResponse) {
-          errorMessage = `Error Status ${returnedError.status}: ${returnedError.error?.error || 'Unknown Error'} - ${returnedError.error?.message || 'No message available'}`
-          handled = this.handleServerSideError(returnedError)
-        }
-
-        console.error(errorMessage ? errorMessage : returnedError)
-
-        if (returnedError.status === 0)
-          this.toastr.error('Internal Server Error', 'Error')
-        else this.toastr.error(returnedError.error.message, 'Error')
-
-        if (!handled) {
-          if (errorMessage) {
-            return throwError(errorMessage)
-          } else {
-            this.toastr.error('Internal Server Error', 'Error')
-            return throwError('Internal Server Error')
-          }
-        } else {
-          return of(returnedError)
-        }
-      })
+      catchError((error: HttpErrorResponse) => this.handleError(error))
     )
   }
 
-  private handleServerSideError(error: HttpErrorResponse): boolean {
+  private handleError(error: HttpErrorResponse): Observable<any> {
+    if (error.error instanceof ErrorEvent) {
+      // Frontend-side error
+      return this.handleFrontendError(error.error)
+    } else {
+      // Server-side error
+      return this.handleServerSideError(error)
+    }
+  }
+
+  private handleFrontendError(error: ErrorEvent): Observable<any> {
+    const errorMessage = `Client-side error: ${error.message}`
+    console.error(errorMessage)
+    this.toastr.error(errorMessage, 'Error')
+    return throwError(errorMessage)
+  }
+
+  private handleServerSideError(error: HttpErrorResponse): Observable<any> {
+    let errorMessage: string
     let handled = false
 
-    switch (error.status) {
-      case 401:
-      case 403:
-        this.router.navigate(['authentication/login'])
-        handled = true
-        break
+    if (error.status === 0) {
+      // Network error or CORS issue
+      errorMessage = 'Internal Server Error'
+      this.toastr.error(errorMessage, 'Error')
+    } else {
+      // Backend returns unsuccessful response codes such as 400, 404, 500 etc.
+      errorMessage = `Error Status ${error.status}: ${error.error?.message || 'Unknown Error'}`
+      this.toastr.error(
+        error.error?.message || 'Internal Server Error',
+        'Error'
+      )
+      handled = this.handleAuthErrors(error)
     }
 
-    return handled
+    console.error(errorMessage)
+
+    if (!handled) {
+      return throwError(errorMessage)
+    } else {
+      return of(error)
+    }
+  }
+
+  private handleAuthErrors(error: HttpErrorResponse): boolean {
+    if (error.status === 401 || error.status === 403) {
+      this.router.navigate(['authentication/login'])
+      return true
+    }
+    return false
   }
 }

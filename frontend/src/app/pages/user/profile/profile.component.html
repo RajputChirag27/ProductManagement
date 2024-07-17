@@ -1,30 +1,39 @@
-<div class="container my-5" *ngIf="result">
-  <div class="card p-lg-5">
-    <div class="container-fluid d-flex justify-content-center">
+<div class="profile-container container rounded-5" *ngIf="result">
+  <h2 class="profile-title mt-5 text-muted">Profile Info</h2>
+  <div class="profile-card mt-5 card"> <!-- Added 'card' class -->
+    <div class="profile-image-container">
       <img
-        class="card-img-top img-fluid m-5 rounded-5 profile-pic"
-        style="max-width: 20rem; max-height: 25rem"
+        class="profile-image img-fluid rounded-circle" 
         [src]="result.profilePicture || defaultProfile"
         alt="Profile Picture"
       />
     </div>
-    <!-- {{result | json}} -->
-    <div class="card-body">
-      <h5 class="card-title my-3">
-        <strong>First Name: </strong>{{ result.firstName }}
-      </h5>
-      <h5 class="card-title">
-        <strong>Last Name: </strong>{{ result.lastName }}
-      </h5>
-      <p class="card-text mt-3"><strong>Email: </strong>{{ result.email }}</p>
-      <p class="card-text"><strong>Role: </strong> {{ result.role }}</p>
-      <p class="card-text">
-        <strong>Contact Details: </strong> {{ result.mobile }}
-      </p>
+    <div class="profile-details card-body"> <!-- Added 'card-body' class -->
+      <div class="profile-detail">
+        <span class="detail-label font-weight-bold">First Name:</span> <!-- Added 'font-weight-bold' class -->
+        <span class="detail-value">{{ result.firstName }}</span>
+      </div>
+      <div class="profile-detail">
+        <span class="detail-label font-weight-bold">Last Name:</span> <!-- Added 'font-weight-bold' class -->
+        <span class="detail-value">{{ result.lastName }}</span>
+      </div>
+      <div class="profile-detail">
+        <span class="detail-label font-weight-bold">Email:</span> <!-- Added 'font-weight-bold' class -->
+        <span class="detail-value">{{ result.email }}</span>
+      </div>
+      <div class="profile-detail">
+        <span class="detail-label font-weight-bold">Role:</span> <!-- Added 'font-weight-bold' class -->
+        <span class="detail-value">{{ result.role }}</span>
+      </div>
+      <div class="profile-detail">
+        <span class="detail-label font-weight-bold">Contact Details:</span> <!-- Added 'font-weight-bold' class -->
+        <span class="detail-value">{{ result.mobile }}</span>
+      </div>
     </div>
-    <div class="card-body">
-      <button class="card-link btn btn-primary">Edit Profile</button>
-      <button class="card-link btn btn-primary">Change Password</button>
+    <div class="profile-footer card-footer"> <!-- Added 'card-footer' class -->
+      <button class="edit-button btn btn-primary" (click)="edit(result._id)">
+        Edit Profile
+      </button>
     </div>
   </div>
 </div>

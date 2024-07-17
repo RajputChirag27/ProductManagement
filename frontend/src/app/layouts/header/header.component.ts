@@ -32,6 +32,7 @@ export class HeaderComponent {
       (res: any) => {
         console.log(res)
         this.result = res.result
+        this.result.profilePicture = `http://localhost:8000/uploads/${res.result.profilePicture}`
       },
       (error: any) => {
         console.error('Error fetching user profile:', error)

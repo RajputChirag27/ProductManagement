@@ -11,6 +11,8 @@ import { NotFoundComponent } from './not-found/not-found.component'
 import { AboutComponent } from './user/about/about.component'
 import { HttpClientModule } from '@angular/common/http'
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { BrowserModule } from '@angular/platform-browser'
 
 @NgModule({
   declarations: [

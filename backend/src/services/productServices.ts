@@ -22,7 +22,7 @@ export class ProductServices {
   }
 
   async getProductData(): Promise<any> {
-    const productData = await ProductModel.find().populate('categoryID');
+    const productData = await ProductModel.find().populate('categoryID')
     if (!productData) {
       throw new CustomError(
         'NotFound',
@@ -34,7 +34,7 @@ export class ProductServices {
   }
 
   async getProductById(id: string): Promise<any> {
-    const ProductById = await ProductModel.findById(id).populate('categoryID');
+    const ProductById = await ProductModel.findById(id).populate('categoryID')
     if (!ProductById) {
       throw new CustomError(
         'NotFound',

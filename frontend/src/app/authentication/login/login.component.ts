@@ -9,7 +9,7 @@ import { IAuth } from 'src/app/core/interfaces/IAuth'
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
   myForm!: FormGroup

@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { OtpComponent } from './otp.component'
+import { ViewUserComponent } from './view-user.component'
 
-describe('OtpComponent', () => {
-  let component: OtpComponent
-  let fixture: ComponentFixture<OtpComponent>
+describe('ViewUserComponent', () => {
+  let component: ViewUserComponent
+  let fixture: ComponentFixture<ViewUserComponent>
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [OtpComponent]
+      declarations: [ViewUserComponent]
     })
-    fixture = TestBed.createComponent(OtpComponent)
+    fixture = TestBed.createComponent(ViewUserComponent)
     component = fixture.componentInstance
     fixture.detectChanges()
   })

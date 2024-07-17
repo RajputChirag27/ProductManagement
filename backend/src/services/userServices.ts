@@ -27,7 +27,7 @@ export class UserServices {
   }
 
   async login(email: string, password: string): Promise<string> {
-    const user = await UserModel.findOne({ email })
+    const user = await UserModel.findOne({ email, isdeleted:false });
     if (!user) {
       throw new CustomError(
         'UserNotFound',
@@ -65,8 +65,11 @@ export class UserServices {
   ): Promise<UserInterface | object> {
     const result = await UserModel.findOne({ _id: id, isdeleted: true })
     if (result) {
-      const message = { message: 'this user already deleted' }
-      return message
+      throw new CustomError(
+        'UserAlreadyDeleted',
+        STATUS_CODE.NOT_FOUND,
+        'User Not Found'
+      )
     } else {
       const update = await UserModel.findByIdAndUpdate(id, updateData, {
         new: true
@@ -79,8 +82,11 @@ export class UserServices {
     const result = await UserModel.findOne({ _id: _id, isdeleted: true })
 
     if (result) {
-      const message = { message: 'this user already deleted' }
-      return message
+      throw new CustomError(
+        'Deleted',
+        STATUS_CODE.BAD_REQUEST,
+        'Your Product is already deleted'
+      )
     } else {
       const delete1 = await UserModel.findByIdAndUpdate(_id, {
         isdeleted: true
@@ -89,15 +95,28 @@ export class UserServices {
     }
   }
 
-  async findUser(_id: string): Promise<void | object> {
-    const user = await UserModel.findOne({ _id: _id })
+  async findUser(id: string): Promise<void | object> {
+    const user = await UserModel.findOne({ _id: id })
+    if (!user) {
+      throw new CustomError(
+        'UserNotFound',
+        STATUS_CODE.BAD_REQUEST,
+        'User Not Found'
+      )
+    } else {
+      return user
+    }
+  }
+
+  async findUsers(): Promise<void | object[]> {
+    const user = await UserModel.find({ isdeleted: false })
     if (user) {
       return user
     } else {
       throw new CustomError(
         'UserNotFound',
         STATUS_CODE.BAD_REQUEST,
-        'User Not Found'
+        'Users Not Found'
       )
     }
   }

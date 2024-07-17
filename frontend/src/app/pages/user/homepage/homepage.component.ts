@@ -1,10 +1,12 @@
+import { animate, style, transition, trigger } from '@angular/animations'
 import { HttpClient } from '@angular/common/http'
 import { Component } from '@angular/core'
+
 
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
-  styleUrls: ['./homepage.component.scss']
+  styleUrls: ['./homepage.component.scss'],
 })
 export class HomepageComponent {
   constructor(private http: HttpClient) {}
@@ -18,4 +20,6 @@ export class HomepageComponent {
       }
     )
   }
+
+  
 }

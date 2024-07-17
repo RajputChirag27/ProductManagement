@@ -7,8 +7,6 @@ import { LoginComponent } from './login/login.component'
 import { SignupComponent } from './signup/signup.component'
 import { ReactiveFormsModule } from '@angular/forms'
 import { ToastrModule } from 'ngx-toastr'
-import { OtpComponent } from './otp/otp.component'
-import { GenerateOtpComponent } from './otp/generate-otp/generate-otp.component'
 import { NgOtpInputModule } from 'ng-otp-input'
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input'
 
@@ -19,8 +17,6 @@ import { NgxIntlTelInputModule } from 'ngx-intl-tel-input'
     AuthenticationComponent,
     LoginComponent,
     SignupComponent,
-    OtpComponent,
-    GenerateOtpComponent
   ],
   imports: [
     CommonModule,

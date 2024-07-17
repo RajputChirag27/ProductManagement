@@ -28,7 +28,7 @@ export class EditProductComponent implements OnInit {
     private productService: ProductService,
     private categoryService: CategoryService,
     private toastr: ToastrService,
-    private location : Location
+    private location: Location
   ) {}
 
   zoomIn() {
@@ -212,6 +212,6 @@ export class EditProductComponent implements OnInit {
   }
 
   back() {
-    this.location.back(); 
+    this.location.back()
   }
 }

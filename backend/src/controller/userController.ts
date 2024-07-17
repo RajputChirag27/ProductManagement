@@ -1,7 +1,13 @@
 import { NextFunction, Request, Response } from 'express'
 import { inject } from 'inversify'
 import { UserServices } from '../services'
-import { controller, httpPost, httpGet } from 'inversify-express-utils'
+import {
+  controller,
+  httpPost,
+  httpGet,
+  httpDelete,
+  httpPut
+} from 'inversify-express-utils'
 import { TYPES } from '../utils/types'
 import { UserInterface } from '../interface'
 import { STATUS_CODE } from '../utils/constant'
@@ -10,6 +16,7 @@ import { Auth } from '../middleware/auth'
 import { UserQuery } from '../query'
 import { ApiHandler } from '../helpers/apiHandler'
 import CustomError from '../helpers/customError'
+import { upload } from '../middleware/fileUpload'
 
 @controller('/user')
 export class UserController {
@@ -24,21 +31,51 @@ export class UserController {
     this.userQuery = userQuery
   }
 
-  @httpPost('/insert-user')
+  @httpGet('', Auth)
+  async getUsers(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
+    try {
+      const find: any = req.find
+      if (find.role === 'admin') {
+        const result = await this.userServices.findUsers()
+        res
+          .status(STATUS_CODE.OK)
+          .json(new ApiHandler(result, 'Users Fetched Successfully'))
+      } else {
+        throw new CustomError(
+          'Invalid',
+          STATUS_CODE.BAD_REQUEST,
+          'Wrong user ID'
+        )
+      }
+    } catch (err) {
+      next(err)
+    }
+  }
+
+  @httpPost('/insert-user', upload.single('profilePicture'))
   async userData(
     req: Request,
     res: Response,
     next: NextFunction
   ): Promise<void> {
     try {
-      const { firstName, lastName, email, password, mobile, role, isdeleted } =
-        req.body
+      console.log(req.body)
+      const imagePath = (req as any).file.filename
+      let { firstName, lastName, email, password, role, isdeleted } = req.body
+      const mobileNo = req.body.mobile
+      const parsedMobile = JSON.parse(mobileNo)
+
       const body: UserInterface = {
         firstName,
         lastName,
         email,
+        profilePicture: imagePath,
         password,
-        mobile,
+        mobile: parsedMobile.e164Number,
         role,
         isdeleted
       }
@@ -78,7 +115,7 @@ export class UserController {
     res.send({ hello: 'Hello' })
   }
 
-  @httpPost('/update-user/:id', Auth)
+  @httpPut('/update-user/:id', Auth)
   async updateData(
     req: Request,
     res: Response,
@@ -87,21 +124,40 @@ export class UserController {
     try {
       const update: any = req.find
       const id = req.params.id
-      const { ...updateData } = req.body
-      if (update.id === id) {
-        const result = await this.userServices.updateUser(id, updateData)
-        res.send(result)
-        return
+      console.log(id)
+      console.log(req.body)
+      const updateData = req.body
+      const { mobile } = req.body
+
+      if (mobile && typeof mobile === 'object' && mobile.e164Number) {
+        updateData.mobile = mobile.e164Number
       } else {
-        res.send('you can not update other profile')
-        return
+        // Handle the case where mobile is not in the expected format
+        throw new CustomError(
+          'Invalid',
+          STATUS_CODE.BAD_REQUEST,
+          'Invalid mobile format'
+        )
+      }
+
+      if (update.id === id || update.role === 'admin') {
+        const result = await this.userServices.updateUser(id, updateData)
+        res
+          .status(STATUS_CODE.OK)
+          .json(new ApiHandler(result, 'Profile Updated Successfully'))
+      } else {
+        throw new CustomError(
+          'INVALID',
+          STATUS_CODE.BAD_REQUEST,
+          'You cannot update another profile'
+        )
       }
     } catch (err) {
       next(err)
     }
   }
 
-  @httpPost('/delete-user/:id', Auth)
+  @httpDelete('/delete-user/:id', Auth)
   async DeleteUser(
     req: Request,
     res: Response,
@@ -110,14 +166,18 @@ export class UserController {
     try {
       const del: any = req.find
       const id = req.params.id
-
+      console.log(id)
       if (del.id === id || del.role === 'admin') {
-        await this.userServices.deleteUser(id)
-        res.send('SUCCESSFULLY DELETED')
-        return
+        const result = await this.userServices.deleteUser(id)
+        res
+          .status(STATUS_CODE.OK)
+          .json(new ApiHandler(result, 'User Deleted Successfully'))
       } else {
-        res.send('you can not delete other profile')
-        return
+        throw new CustomError(
+          'Unauthorized',
+          STATUS_CODE.UNAUTHORIZED,
+          'You must be an admin or Contact Administrator'
+        )
       }
     } catch (err) {
       next(err)
@@ -132,25 +192,12 @@ export class UserController {
   ): Promise<void> {
     try {
       const find: any = req.find
-      const { _id } = req.params
-      if (find.id === _id) {
-        const users = await this.userServices.findUser(_id)
-        res.json({ users })
-      } else if (find.role === 'admin') {
-        const { filter, search, page = 1, limit = 10 } = req.query
-        const { users, total_pages } = await this.userQuery.findAll(
-          filter as string,
-          search as string,
-          +page,
-          +limit
-        )
-        res.status(STATUS_CODE.OK).json({
-          total_pages,
-          current_page: page,
-          users
-        })
-      } else {
-        res.send('Wrong user ID')
+      const { id } = req.params
+      if (find.id === id || find.role == 'admin') {
+        const users = await this.userServices.findUser(id)
+        res
+          .status(STATUS_CODE.OK)
+          .json(new ApiHandler(users, 'User Fetched Successfully'))
       }
     } catch (err) {
       next(err)

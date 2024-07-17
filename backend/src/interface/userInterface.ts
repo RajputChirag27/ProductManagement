@@ -6,6 +6,7 @@ export interface UserInterface {
   email: string
   password: string
   mobile: string
+  profilePicture: string
   role: UserRole
   isdeleted?: boolean
 }

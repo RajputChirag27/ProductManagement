@@ -5,6 +5,7 @@ import { ChatRoutingModule } from './chat-routing.module'
 import { ChatComponent } from './chat.component'
 import { ReactiveFormsModule } from '@angular/forms'
 import { MarkdownModule } from 'ngx-markdown'
+import * as MarkdownIt from 'markdown-it'
 
 @NgModule({
   declarations: [ChatComponent],
@@ -12,7 +13,7 @@ import { MarkdownModule } from 'ngx-markdown'
     CommonModule,
     ChatRoutingModule,
     MarkdownModule.forRoot(),
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ]
 })
 export class ChatModule {}

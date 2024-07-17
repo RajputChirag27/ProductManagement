@@ -11,6 +11,7 @@ fs.ensureDirSync(uploadDir)
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     //console.log(req.body)
+    // console.log(req.body);
     cb(null, uploadDir)
   },
   filename: (req, file, cb) => {

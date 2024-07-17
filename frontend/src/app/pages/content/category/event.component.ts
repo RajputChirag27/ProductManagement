@@ -27,7 +27,7 @@ export class CategoryComponent {
     private route: ActivatedRoute,
     private router: Router,
     private toastr: ToastrService,
-    private location : Location
+    private location: Location
   ) {
     this.eventForm = this.fb.group({
       name: ['', Validators.required]
@@ -73,6 +73,6 @@ export class CategoryComponent {
   }
 
   back() {
-    this.location.back(); 
+    this.location.back()
   }
 }

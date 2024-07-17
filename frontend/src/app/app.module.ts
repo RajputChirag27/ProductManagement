@@ -11,6 +11,7 @@ import { TokenInterceptor } from './core/interceptors/token.interceptor'
 import { AuthService } from './core/services/auth.service'
 import { HTTP_INTERCEPTORS } from '@angular/common/http'
 import { NgOtpInputModule } from 'ng-otp-input'
+import {provideAnimations} from '@angular/platform-browser/animations'
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,6 +24,7 @@ import { NgOtpInputModule } from 'ng-otp-input'
     AuthenticationModule
   ],
   providers: [
+    provideAnimations(),
     AuthService,
     {
       provide: HTTP_INTERCEPTORS,

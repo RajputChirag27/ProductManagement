@@ -13,13 +13,13 @@ const routes: Routes = [
     path: '',
     component: ContentComponent,
     children: [
-      { path: 'createArticle', component: ContenteditComponent },
-      { path: 'createArticle/:id', component: ContenteditComponent },
-      { path: 'dashboard', component: DashboardComponent },
-      { path: 'categoryTable', component: CategoryTableComponent },
-      { path: 'category', component: CategoryComponent },
-      { path: 'category/:id', component: CategoryComponent },
-      { path: 'viewPage/:id', component: ViewPageComponent }
+      { path: 'createArticle', component: ContenteditComponent , data :{ animation: 'CreateArticle' } },
+      { path: 'createArticle/:id', component: ContenteditComponent, data :{ animation: 'CreateArticle' } },
+      { path: 'dashboard', component: DashboardComponent, data :{ animation: 'Dashboard' } },
+      { path: 'categoryTable', component: CategoryTableComponent, data :{ animation: 'CategoryTable' } },
+      { path: 'category', component: CategoryComponent, data :{ animation: 'Category' } },
+      { path: 'category/:id', component: CategoryComponent,data :{ animation: 'Category' } },
+      { path: 'viewPage/:id', component: ViewPageComponent, data :{ animation: 'ViewPage' } }
     ],
     canActivate: [AdminGuard]
   }

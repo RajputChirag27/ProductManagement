@@ -21,7 +21,7 @@ export class ViewProductComponent {
     private toastr: ToastrService,
     private ngZone: NgZone,
     private route: ActivatedRoute,
-    private location : Location
+    private location: Location
   ) {}
   ngOnInit() {
     this.productId = this.route.snapshot.paramMap.get('id')
@@ -32,7 +32,7 @@ export class ViewProductComponent {
       },
       (error: any) => {
         console.error('Error fetching products:', error)
-        this.toastr.error('Failed to fetch products', 'Error')
+        // this.toastr.error('Failed to fetch products', 'Error')
       }
     )
   }
@@ -110,6 +110,6 @@ export class ViewProductComponent {
   }
 
   back() {
-    this.location.back(); 
+    this.location.back()
   }
 }
