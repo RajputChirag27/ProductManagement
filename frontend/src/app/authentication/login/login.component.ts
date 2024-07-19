@@ -32,13 +32,11 @@ export class LoginComponent {
 
   onSubmit() {
     const { email, password, rememberMe } = this.myForm.value // Destructure email and password from form value
-    console.log({ email, password, rememberMe })
     const result = this._authService
       .login({ email, password } as Partial<IAuth>)
       .subscribe(
         (response: any) => {
           // Assuming setToken function is correct in AuthService
-          console.log(response)
           this.toastr.info(`${response.message}`, `Welcome!`, {
             timeOut: 3000,
             closeButton: true,

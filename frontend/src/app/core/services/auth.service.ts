@@ -49,18 +49,14 @@ export class AuthService {
   }
 
   verifyOtp(otp: string) {
-    console.log('Service Otp ' + otp)
     return this.http.post(`${environment.apiUrl}/user/verifyOTP`, { otp })
   }
 
   isAdmin(): any {
     const token = localStorage.getItem('authToken')
-    console.log('token : ', token)
     if (token) {
       const decode: any = jwtDecode(token)
-      console.log('Decoded : ', decode)
       const role = decode.role
-      console.log(role)
       return localStorage.getItem('authToken') !== null && role === 'admin'
     }
   }

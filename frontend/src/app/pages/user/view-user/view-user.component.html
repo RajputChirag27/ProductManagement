@@ -8,27 +8,19 @@
 
 <div class="container mt-5 col-lg-4">
   <div *ngIf="user" class="card my-5">
-    <div *ngIf="user" class="card my-5">
-      <img
-        [src]="imagePreview"
-        class="my-5 card-img-top img-fluid product-image"
-        alt="Product Image"
-        (click)="openImageModal(imagePreview)"
-      />
-    </div>
-    <div
-      class="card-body d-flex flex-column justify-content-center align-items-start align-self-center"
-    >
-      <h5 class="card-title">{{ user.firstName }} {{ user.lastName }}</h5>
-      <p class="card-text"><strong>Email:</strong> {{ user.email }}</p>
-      <p class="card-text"><strong>Mobile:</strong> {{ user.mobile }}</p>
-      <p class="card-text"><strong>Role:</strong> {{ user.role }}</p>
-      <p class="card-text">
-        <strong>Created At:</strong> {{ user.createdAt | date }}
-      </p>
-      <p class="card-text">
-        <strong>Updated At:</strong> {{ user.updatedAt | date }}
-      </p>
+    <img
+      [src]="imagePreview"
+      class="my-5 card-img-top img-fluid product-image"
+      alt="Product Image"
+      (click)="openImageModal(imagePreview)"
+    />
+    <div class="card-body d-flex flex-column justify-content-center align-items-start align-self-center">
+      <h5 class="card-title"><i class="fas fa-user"></i> {{ user.firstName }} {{ user.lastName }}</h5>
+      <p class="card-text"><strong><i class="fas fa-envelope"></i> Email:</strong> {{ user.email }}</p>
+      <p class="card-text"><strong><i class="fas fa-mobile-alt"></i> Mobile:</strong> {{ user.mobile }}</p>
+      <p class="card-text"><strong><i class="fas fa-user-tag"></i> Role:</strong> {{ user.role }}</p>
+      <p class="card-text"><strong><i class="fas fa-calendar-alt"></i> Created At:</strong> {{ user.createdAt | date }}</p>
+      <p class="card-text"><strong><i class="fas fa-calendar-alt"></i> Updated At:</strong> {{ user.updatedAt | date }}</p>
     </div>
   </div>
 </div>

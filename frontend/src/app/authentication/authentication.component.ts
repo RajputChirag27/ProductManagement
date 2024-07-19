@@ -15,9 +15,7 @@ export class AuthenticationComponent {
   }
   getRouteAnimationDataAuth() {
     const context = this.contexts.getContext('primary');
-    console.log(context)
     const animationData = context?.route?.snapshot?.data?.['animation'];
-    console.log('Route animation data:', animationData); // Debugging line
     return animationData;
   }
 }

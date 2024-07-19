@@ -15,15 +15,13 @@
       (click)="openImageModal(imagePreview)"
     />
     <div
-      class="card-body d-flex flex-column justify-content-center align-items-start align-self-center"
+      class="card-body d-flex flex-column justify-content-center align-items-start align-self-center py-5"
     >
-      <h5 class="card-title">{{ product.title }}</h5>
-      <p class="card-text">{{ product.description }}</p>
-      <p class="card-text"><strong>Price:</strong> {{ product.price }}</p>
-      <p class="card-text"><strong>Quantity:</strong> {{ product.quantity }}</p>
-      <p class="card-text mb-5">
-        <strong>Category ID:</strong> {{ product.categoryID.name }}
-      </p>
+    <h5 class="card-title"><i class="fas fa-tag"></i> {{product.title}}</h5>
+    <p class="card-text"><i class="fas fa-clipboard-list"></i> {{product.description}}</p>
+    <p class="card-text"><strong><i class="fas fa-dollar-sign"></i> Price:</strong> ${{product.price}}</p>
+    <p class="card-text"><strong><i class="fas fa-box-open"></i> Quantity:</strong> {{product.quantity}}</p>
+    <p class="card-text"><strong><i class="fas fa-tags"></i> Category:</strong> {{product.categoryID.name}}</p>
     </div>
   </div>
 </div>

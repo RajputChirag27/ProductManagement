@@ -71,7 +71,6 @@ export class SignupComponent implements OnInit {
       const reader = new FileReader()
       reader.onload = () => {
         this.imagePreview = reader.result
-        console.log('Image Preview URL:', this.imagePreview) // Debugging step
       }
       reader.readAsDataURL(file)
     }
@@ -169,9 +168,7 @@ export class SignupComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log(this.userForm)
     if (this.userForm.valid) {
-      console.log(this.userForm)
       const formData = new FormData()
       const mobileControl = JSON.stringify(this.userForm.get('mobile')?.value)
       formData.append('firstName', this.userForm.get('firstName')?.value)
@@ -216,7 +213,6 @@ export class SignupComponent implements OnInit {
   }
 
   updateUser(formData: any): void {
-    console.log('FormData', formData)
     if (this.userId) {
       this._userService
         .updateUser(this.userId, this.userForm.value)

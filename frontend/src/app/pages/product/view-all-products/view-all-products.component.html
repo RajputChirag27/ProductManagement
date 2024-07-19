@@ -1,0 +1,91 @@
+<div class="container">
+    <h1 class="text-center mb-5">Products</h1>
+    <div class="row">
+      <div class="col-lg-6 mb-4">
+        <div class="input-group">
+          <span class="input-group-text"><i class="fas fa-search"></i></span>
+          <input type="text" class="form-control" placeholder="Search by title or description" [(ngModel)]="searchTerm">
+        </div>
+      </div>
+      <div class="col-lg-6 mb-4">
+        <div class="input-group">
+          <span class="input-group-text"><i class="fas fa-filter"></i></span>
+          <select class="form-control" [(ngModel)]="selectedCategory">
+            <option value="">All Categories</option>
+            <option *ngFor="let category of categories" [value]="category.name">{{category.name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-lg-6 mb-4">
+        <div class="input-group">
+          <span class="input-group-text"><i class="fas fa-dollar-sign"></i> Min</span>
+          <input type="number" class="form-control" placeholder="Minimum Price" [(ngModel)]="minPrice">
+        </div>
+      </div>
+      <div class="col-lg-6 mb-4">
+        <div class="input-group">
+          <span class="input-group-text"><i class="fas fa-dollar-sign"></i> Max</span>
+          <input type="number" class="form-control" placeholder="Maximum Price" [(ngModel)]="maxPrice">
+        </div>
+      </div>
+    </div>
+    <div class="row mt-5">
+      <ng-container *ngIf="filteredProducts().length > 0; else noResults">
+        <div *ngFor="let product of filteredProducts()" class="col-md-4 mb-4">
+          <div class="card product-card h-100">
+            <img [src]="product.image" class="card-img-top" alt="{{product.title}}" (click)="openImageModal(product.image)">
+            <div class="card-body">
+              <h5 class="card-title"><i class="fas fa-tag"></i> {{product.title}}</h5>
+              <p class="card-text"><i class="fas fa-clipboard-list me-2"></i> {{product.description}}</p>
+              <p class="card-text"><strong><i class="fas fa-dollar-sign me-2"></i> Price:</strong> ${{product.price}}</p>
+              <p class="card-text"><strong><i class="fas fa-box-open"></i> Quantity:</strong> {{product.quantity}}</p>
+              <p class="card-text"><strong><i class="fas fa-tags"></i> Category:</strong> {{product.categoryID.name}}</p>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #noResults>
+        <div class="col-12 text-center">
+          <h3>No results found</h3>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+  
+  <!-- Bootstrap Modal -->
+  <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-fullscreen" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="imageModalLabel">Image Preview</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeImageModal()"></button>
+        </div>
+        <div class="modal-body d-flex justify-content-center align-items-center">
+          <img [src]="modalImage" alt="Image preview" class="img-fluid modal-image">
+        </div>
+        <div class="modal-footer">
+          <div class="container-fluid">
+            <div class="row align-items-center">
+              <div class="col-md-6 text-start mb-2 mb-md-0">
+                <button type="button" class="btn btn-sm btn-light me-2" (click)="zoomIn()">
+                  <i class="fas fa-search-plus"></i> Zoom In
+                </button>
+                <button type="button" class="btn btn-sm btn-light" (click)="zoomOut()">
+                  <i class="fas fa-search-minus"></i> Zoom Out
+                </button>
+              </div>
+              <div class="col-md-6 text-md-end">
+                <button type="button" class="btn btn-primary" (click)="downloadImage()">
+                  Download <i class="fa fa-solid fa-download" aria-hidden="true"></i>
+                </button>
+                <button type="button" class="btn btn-secondary ms-2" data-bs-dismiss="modal" (click)="closeImageModal()">
+                  Close <i class="fa fa-solid fa-close" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

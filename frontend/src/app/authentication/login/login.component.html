@@ -1,6 +1,6 @@
 <main>
-  <section class="login-section">
-    <div class="login-container container my-5">
+  <section class="login-section d-flex flex-column justify-content-center align-items-center vh-100">
+    <div class="login-container container">
       <h2 class="text-center mt-3">Login</h2>
       <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
         <div class="form-group mb-3 mt-5">
@@ -33,7 +33,7 @@
             [required]="true"
           />
           <label class="form-check-label" for="rememberMe"
-            >Agree to Terms and Conditions</label
+            >Remember Me</label
           >
         </div>
         <button

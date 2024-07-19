@@ -1,0 +1,52 @@
+$theme-color: #6351ce;
+$dark-bg: #1a1a1a;
+$light-text: #f0f0f0;
+
+body {
+  background-color: $dark-bg;
+  color: $light-text;
+}
+
+.product-card {
+  background-color: $theme-color;
+  border: none;
+  color: $light-text;
+
+  .card-img-top {
+    max-height: 200px;
+    object-fit: cover;
+  }
+
+  .card-title {
+    color: $light-text;
+  }
+
+  .card-text {
+    color: $light-text;
+  }
+
+  .card-body {
+    background-color: darken($theme-color, 10%);
+  }
+}
+
+.input-group-text {
+  background-color: $theme-color;
+  color: $light-text;
+}
+
+.form-control {
+  background-color: $dark-bg;
+  color: $light-text;
+  border: 1px solid $theme-color;
+}
+
+select.form-control {
+  background-color: $dark-bg;
+  color: $light-text;
+  border: 1px solid $theme-color;
+}
+
+h1 {
+  color: $theme-color;
+}
